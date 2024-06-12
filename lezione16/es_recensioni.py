@@ -177,43 +177,134 @@ search_recipe_by_ingredient(ingredient): Trova e restituisce tutte le ricette ch
 
 class RecipeManager:
 
-    def __init__(self, recipes:list) -> None:
-        self.recipes=[]
+    def __init__(self) -> None:
+        self.recipe: dict={}
 
-    def create_recipe(self, name: str, ingredients: list): 
-        recipe={}
-        for key in recipe.keys():
-            if key != name:
-                recipe[name]={ingredients}
-                self.recipes.append(recipe)
-            else:
-                return "Ricetta già presente"
+    def create_recipe(self, name: str, ingredients: list):
+        if name in self. recipe:
+            return "Ricetta già presente"
+        self.recipe[name]=ingredients
+        return self.recipe
         
-
+    
     def add_ingredient(self, recipe_name, ingredient):
-        for i in self.recipes:
-            i
-            
+        if recipe_name not in self.recipe:
+            return "Ricetta inesistente"
+        elif recipe_name in self.recipe and ingredient not in self.recipe[recipe_name]:
+            self.recipe[recipe_name].append(ingredient)
+            return self.recipe
+        else:
+            return "Ingrediente già presente nella ricetta"
         
 
     def remove_ingredient(self, recipe_name, ingredient):
-        pass
+        if recipe_name in self.recipe and ingredient in self.recipe[recipe_name]:
+            self.recipe[recipe_name].remove(ingredient)
+            return self.recipe
+        elif recipe_name in self.recipe and ingredient not in self.recipe[recipe_name]:
+            return "Ingrediente non presente"
+        else: 
+            return "Ricetta inesistente"
 
-    def update_ingredient(recipe_name, old_ingredient, new_ingredient):
-        pass
+    def update_ingredient(self, recipe_name, old_ingredient, new_ingredient):
+        if recipe_name in self.recipe and old_ingredient in self.recipe[recipe_name]:
+            self.recipe[recipe_name].remove(old_ingredient)
+            self.recipe[recipe_name].append(new_ingredient)
+            return self.recipe    
+        elif recipe_name in self.recipe and old_ingredient not in self.recipe[recipe_name]:
+            return "Ingrediente non presente"
+        else: 
+            return "Ricetta inesistente"
 
-    def list_recipes():
-        pass
+    def list_recipes(self):
+        for i in self.recipe.keys():
+            return i
 
-    def list_ingredients(recipe_name):
-        pass
+    def list_ingredients(self,recipe_name):
+        if recipe_name in self.recipe:
+            return self.recipe.get(recipe_name)
+        else:
+            return "Ricetta inesistente"
+             
+            
 
-    def search_recipe_by_ingredient(ingredient):
-        pass
+    def search_recipe_by_ingredient(self, ingredient):
+        recipes_ingredients=[]
+        for i in self.recipe.items:
+            if ingredient in i:
+                recipes_ingredients.append(self.recipe.keys)    
+            else:
+                return f"nessuna ricetta contiene l'ingrediente: {ingredient}"
+        return recipes_ingredients
 
 
 
+manager = RecipeManager()
+print(manager.create_recipe("Pizza Margherita", ["Farina", "Acqua", "Lievito", "Pomodoro", "Mozzarella"]))
+print(manager.add_ingredient("Pizza Margherita", "Basilico"))
+print(manager.update_ingredient("Pizza Margherita", "Mozzarella", "Mozzarella di Bufala"))
+print(manager.remove_ingredient("Pizza Margherita", "Acqua"))
+print(manager.list_ingredients("Pizza Margherita"))
 
 
+"""
+In questo esercizio, creeremo una gerarchia di classi per rappresentare diversi tipi di veicoli.
 
+1. Classe Base: Veicolo
+Crea una classe base chiamata Veicolo con i seguenti attributi e metodi:
+ 
+Attributi:
+marca (stringa)
+modello (stringa)
+anno (intero)
+Metodi:
+__init__(self, marca, modello, anno): metodo costruttore che inizializza gli attributi marca, modello e anno.
+descrivi_veicolo(self): metodo che stampa una descrizione del veicolo nel formato "Marca: [marca], Modello: [modello], Anno: [anno]".
+2. Classe Derivata: Auto
+Crea una classe derivata chiamata Auto che eredita dalla classe Veicolo e aggiunge i seguenti attributi e metodi:
+ 
+Attributi:
+numero_porte (intero)
+Metodi:
+__init__(self, marca, modello, anno, numero_porte): metodo costruttore che inizializza gli attributi della classe base e numero_porte.
+descrivi_veicolo(self): metodo che sovrascrive quello della classe base per includere anche il numero di porte nella descrizione, 
+nel formato "Marca: [marca], Modello: [modello], Anno: [anno], Numero di porte: [numero_porte]".
+3. Classe Derivata: Moto
+Crea una classe derivata chiamata Moto che eredita dalla classe Veicolo e aggiunge i seguenti attributi e metodi:
+ 
+Attributi:
+tipo (stringa, ad esempio "sportiva", "cruiser", ecc.)
+Metodi:
+__init__(self, marca, modello, anno, tipo): metodo costruttore che inizializza gli attributi della classe base e tipo.
+descrivi_veicolo(self): metodo che sovrascrive quello della classe base per includere anche il tipo di moto nella descrizione, 
+nel formato "Marca: [marca], Modello: [modello], Anno: [anno], Tipo: [tipo]".
+"""
 
+class Veicolo:
+
+    def __init__(self, marca: str, modello: str, anno: int) -> None:
+        self.marca=marca
+        self.modello=modello
+        self.anno=anno
+
+    def descrivi_veicolo(self): 
+        return f"Marca: [{self.marca}], Modello: [{self.modello}], Anno: [{self.anno}]"
+    
+class Auto(Veicolo):
+
+    def __init__(self, marca: str, modello: str, anno: int, numero_porte: int) -> None:
+        super().__init__(marca, modello, anno)
+        self.numero_porte= numero_porte
+    
+    def descrivi_veicolo(self):
+        return f"Marca: [{self.marca}], Modello: [{self.modello}], Anno: [{self.anno}], Numero di porte: [{self.numero_porte}]"
+    
+    
+class Moto(Veicolo):
+
+    def __init__(self, marca: str, modello: str, anno: int, tipo: str) -> None:
+        super().__init__(marca, modello, anno)
+        self.tipo=tipo
+    
+     def descrivi_veicolo(self): 
+        return f"Marca: [{self.marca}], Modello: [{self.modello}], Tipo: [{self.tipo}]"
