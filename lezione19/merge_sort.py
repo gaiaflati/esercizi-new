@@ -5,8 +5,11 @@ def mergesort(lista: list) ->list:
 
     mid_point: int = len(lista)//2
 
-    mergesort(lista=lista[:mid_point])
-    mergesort(lista=lista[mid_point:])
+    list_1 : list= mergesort(lista=lista[:mid_point])
+    list_2 : list= mergesort(lista=lista[mid_point:])
+
+    return merge(list_1, list_2)
+
 
 def merge(list_1: list[int], list_2: list[int]) ->list[int]:
     
