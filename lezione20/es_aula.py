@@ -32,6 +32,13 @@
 
 
 
+from decorator_es import decorator
+
+
+
+
+
+
 class Pagamento:
 
     def __init__(self) -> None:
@@ -56,12 +63,16 @@ class PagamentoContanti(Pagamento):
     def __init__(self) -> None:
         super().__init__()
     
+    @decorator
     def setImporto(self, _importo: float):
         return super().setImporto(_importo)
     
+
+    @decorator
     def dettagliPagamento(self):
         return f"Pagamento in contanti di: {round(self.importo, 2)}"
     
+    @decorator
     def inPezziDa(self):
         pezzi_banconote=[500.00, 200.00, 100.00, 50.00, 20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05, 0.01]
         for i in pezzi_banconote:
@@ -85,6 +96,8 @@ class PagamentoCartaDiCredito(Pagamento):
         self.scadenza=scadenza
         self.numero_carta= numero_carta
 
+
+    @decorator
     def dettagliPagamento(self):
         return f"Pagamento di: {self.importo} effettuato con la carta di credito \n Nome sulla carta: {self.nome_titolare} \n Data di scadenza: {self.scadenza} \n Numero della carta: {self.numero_carta}"
 
@@ -113,8 +126,6 @@ credito_1.setImporto(500.00)
 credito_2.setImporto(200.00)
 print(credito_1.dettagliPagamento())
 print(credito_2.dettagliPagamento())
-
-
 
 
     
