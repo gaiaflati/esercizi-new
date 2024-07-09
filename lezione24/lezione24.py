@@ -90,15 +90,24 @@ class File(Documento):
 
     def __init__(self, text: str) -> None:
         super().__init__(text)
+        self.nomePercorso: str= "lezione24/"
 
-        self.nomePercorso=
-
-    def createFile(self):
-
-        with open(f"./{self.nomePercorso}/document.txt", "w") as reader:
-            reader.write("Questo e' il contenuto del file.")
-        
 
     def leggiTestoDaFile(self):
+
+        with open(f"document.txt", "w") as reader:
+            reader.write("Questo e' il contenuto del file.")
+            self.text=reader.read()
+    
+    def getText(self):
+        print(f"Percorso: {self.nomePercorso}")
+        print(f"Contenuto: {self.text}")
+
+doc1= Documento("ciao bella")
+file1= File("Ciao core")
+file1.leggiTestoDaFile()
+        
+
+   
         
 
