@@ -306,5 +306,5 @@ class Moto(Veicolo):
         super().__init__(marca, modello, anno)
         self.tipo=tipo
     
-     def descrivi_veicolo(self): 
+    def descrivi_veicolo(self): 
         return f"Marca: [{self.marca}], Modello: [{self.modello}], Tipo: [{self.tipo}]"

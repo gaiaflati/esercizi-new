@@ -98,9 +98,11 @@ class PagamentoCartaDiCredito(Pagamento):
 
 contanti_1=PagamentoContanti()
 contanti_2= PagamentoContanti()
+contanti_3=PagamentoContanti()
 
 credito_1=PagamentoCartaDiCredito(nome_titolare="Mario Rossi", scadenza="06/24", numero_carta=80056782789)
 credito_2=PagamentoCartaDiCredito(nome_titolare="Gaia Flati", scadenza="05/32", numero_carta=38409809801)
+credito_3=PagamentoCartaDiCredito(nome_titolare="Leonardo Servetti", scadenza="04/27", numero_carta=123456789)
 
 contanti_1.setImporto(150)
 contanti_2.setImporto(95.25)
@@ -113,6 +115,12 @@ credito_1.setImporto(500.00)
 credito_2.setImporto(200.00)
 print(credito_1.dettagliPagamento())
 print(credito_2.dettagliPagamento())
+
+credito_3.setImporto(10.00)
+print(credito_3.dettagliPagamento())
+contanti_3.setImporto(274.00)
+contanti_3.inPezziDa()
+print(contanti_3.dettagliPagamento())
 
 
 

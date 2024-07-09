@@ -2,14 +2,7 @@
 # Si vuole sviluppare un sistema in Python per gestire il rendering di diverse forme geometriche. Il sistema dovrà supportare almeno tre tipi di forme: 
 # quadrati, rettangoli, e triangoli rettangoli.
 
-# Definire la classe astratta Forma che sarà utilizzata per definire l'attributo corrispondente al nome della forma e le funzionalità base di ogni forma, 
-# come i metodi astratti getArea() per calcolare l'area e render() per disegnare su schermo la forma.
 
-# Definire la classe Quadrato che estende la classe Forma e aggiunge specifiche circa la lunghezza di un suo lato.
-# Il costruttore della classe deve ricevere come argomento solo il lato del quadrato, ed impostare il nome della forma su "Quadrato".
-# Il metodo getArea() deve calcolare l'area del quadrato.
-# Il metodo render() deve stamapre su schermo un quadrato avente lato pari al valore passato nel costruttore. 
-# Il quadrato da stampare deve essere un quadrato vuoto (" "), avente degli asterischi ("*") lungo il suo perimetro. (Vedi Esempio di output)
 
 # Definire la classe Rettangolo che estende la classe Forma e aggiunge specifiche circa la lunghezza della sua base e della sua altezza.
 # Il costruttore della classe deve ricevere come argomento solo la base e l'altezza del rettangolo, ed impostare il nome della forma su "Rettangolo".
@@ -53,8 +46,16 @@
 
 from abc import ABC, abstractmethod
 
+# Definire la classe astratta Forma che sarà utilizzata per definire l'attributo corrispondente al nome della forma e le funzionalità base di ogni forma, 
+# come i metodi astratti getArea() per calcolare l'area e render() per disegnare su schermo la forma.
+
 class AbcForma(ABC):
 
+    @abstractmethod
+
+    def __init__(self, nome: str) -> None:
+        self.nome=nome
+        
     @abstractmethod
     
     def getArea():
@@ -64,3 +65,28 @@ class AbcForma(ABC):
 
     def render():
         pass
+
+
+
+# Definire la classe Quadrato che estende la classe Forma e aggiunge specifiche circa la lunghezza di un suo lato.
+# Il costruttore della classe deve ricevere come argomento solo il lato del quadrato, ed impostare il nome della forma su "Quadrato".
+# Il metodo getArea() deve calcolare l'area del quadrato.
+# Il metodo render() deve stamapre su schermo un quadrato avente lato pari al valore passato nel costruttore. 
+# Il quadrato da stampare deve essere un quadrato vuoto (" "), avente degli asterischi ("*") lungo il suo perimetro. 
+# (Vedi Esempio di output)
+
+class Quadrato(AbcForma):
+
+    def __init__(self, lunghezza_lato: float, nome="Quadrato") -> None:
+        super().__init__(nome)
+        self.lunghezza_lato=lunghezza_lato
+
+    def getArea(self):
+        Area: float = self.lunghezza_lato**2
+        return Area
+    
+    def render(self):
+        print("*" for i in range(self.lunghezza_lato))
+        print("*",( "" for i in range(self.lunghezza_lato-2)),"*") #metti un for prima per far si che stampi questo per x volte
+
+
