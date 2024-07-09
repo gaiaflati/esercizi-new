@@ -1,4 +1,4 @@
-"""
+
 from abc import ABC, abstractmethod
 
 class AbcAnimal(ABC):
@@ -77,7 +77,7 @@ account1.deposito(500)
 account2.prelievo(200)
 
 ContoBancario.get_total_accounts()
-"""
+
 
 
 
