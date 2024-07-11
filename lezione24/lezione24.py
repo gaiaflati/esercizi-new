@@ -90,13 +90,14 @@ class File(Documento):
 
     def __init__(self, text: str) -> None:
         super().__init__(text)
-        self.nomePercorso: str= "lezione24/"
+        self.nomePercorso: str= "ESERCIZI/lezione24/"
 
 
     def leggiTestoDaFile(self):
 
         with open(f"document.txt", "w") as reader:
             reader.write("Questo e' il contenuto del file.")
+        with open(f"document.txt", "r") as reader:
             self.text=reader.read()
     
     def getText(self):
