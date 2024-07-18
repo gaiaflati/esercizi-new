@@ -1,3 +1,6 @@
+#LEZIONE 5
+
+
 """
 Scrivi una funzione che ritorna il valore massimo, minimo e la media di una lista di numeri interi.
 For example:
@@ -201,6 +204,131 @@ def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
  	
 
 print(merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4}))
+
+
+#LEZIONE 7
+
+"""
+Scrivi una funzione che prende una lista di numeri e ritorna un dizionario che classifica i numeri in liste separate per numeri pari e dispari.
+
+For example:
+
+print(classifica_numeri([1, 2, 3, 4, 5, 6])) 
+
+	
+
+{'pari': [2, 4, 6], 'dispari': [1, 3, 5]}
+
+print(classifica_numeri([]))
+
+	
+
+{'pari': [], 'dispari': []}
+
+"""
+
+def classifica_numeri(lista: int) -> dict[str:list[int]]:
+    pari_dispari={}
+    pari=[]
+    dispari=[]
+    for i in lista:
+        if i%2 == 0:
+            pari.append(i)
+        else:
+            dispari.append(i)
+    pari_dispari["pari"]= pari
+    pari_dispari["dispari"]= dispari
+    return pari_dispari
+
+print(classifica_numeri([1, 2, 3, 4, 5, 6]))
+print(classifica_numeri([2, 4, 6, 8, 10]))
+print(classifica_numeri([]))
+print(classifica_numeri([1, 3, 5]))
+print(classifica_numeri([0, 1, -2, 3, -4]))
+
+
+"""
+Scrivi una funzione che accetti una lista di numeri e ritorni la somma dei numeri che sono divisibili sia per 2 che per 3.
+
+For example:
+
+print(somma_condizionale([1, 2, 3, 6, 12]))     18
+
+print(somma_condizionale([5, 7, 11]))   0         
+"""
+
+def somma_condizionale(numeri: list[int]) -> int :
+    divisibili=[]
+    for i in numeri:
+        if i%2 ==0 and i%3==0:
+            divisibili.append(i)
+    
+    return sum(divisibili)
+
+print(somma_condizionale([1, 2, 3, 6, 12]))     
+print(somma_condizionale([5, 7, 11])) 
+
+
+
+"""
+Scrivi una funzione che elimini dalla lista dati certi elementi specificati in un dizionario. Il dizionario contiene elementi da rimuovere come chiavi 
+e il numero di volte che devono essere rimossi come valori.
+
+For example:
+
+print(rimuovi_elementi([1, 2, 3, 2, 4], {2: 2}))        [1, 3, 4]
+
+print(rimuovi_elementi([], {2: 1}))             []
+"""
+import copy
+def rimuovi_elementi(lista: list[int], da_rimuovere: dict[int:int]) -> list[int]:
+    for i in lista:
+        
+        if i in da_rimuovere.keys() and da_rimuovere[i]>0:
+            lista.pop(i)
+            da_rimuovere[i]-=1
+    return lista
+
+        
+print(rimuovi_elementi([1, 2, 3, 2, 4], {2: 2})) 
+print(rimuovi_elementi([], {2: 1}))   
+print(rimuovi_elementi([1, 1, 1, 1], {1: 2}))
+print(rimuovi_elementi([1, 2, 3, 2, 4], {2: 1}))
+
+"""
+
+Scrivi una funzione che prenda in input una lista di dizionari che rappresentano voti di studenti e aggrega i voti per studente in un nuovo dizionario.
+
+For example:
+
+print(aggrega_voti([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, {'nome': 'Alice', 'voto': 85}]))  {'Alice': [90, 85], 'Bob': [75]}
+
+print(aggrega_voti([]))   {}
+
+"""
+
+def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
+    nomi=[]
+    listavoti=[]
+    new_dict={}
+    for i in voti:
+        for x,y in i.items():
+            if x not in new_dict.keys():
+                new_dict['nome']=x
+                new_dict['voto'].append(y)
+    return new_dict
+    
+            
+
+
+
+print(aggrega_voti([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, {'nome': 'Alice', 'voto': 85}])) 
+
+        
+    
+
+    
+
 
 
 
