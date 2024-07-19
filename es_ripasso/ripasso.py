@@ -280,12 +280,12 @@ print(rimuovi_elementi([1, 2, 3, 2, 4], {2: 2}))        [1, 3, 4]
 
 print(rimuovi_elementi([], {2: 1}))             []
 """
-import copy
+
 def rimuovi_elementi(lista: list[int], da_rimuovere: dict[int:int]) -> list[int]:
     for i in lista:
         
         if i in da_rimuovere.keys() and da_rimuovere[i]>0:
-            lista.pop(i)
+            lista.remove(i)
             da_rimuovere[i]-=1
     return lista
 
@@ -308,18 +308,14 @@ print(aggrega_voti([]))   {}
 """
 
 def aggrega_voti(voti: list[dict]) -> dict[str:list[int]]:
-    nomi=[]
-    listavoti=[]
     new_dict={}
     for i in voti:
-        for x,y in i.items():
-            if x not in new_dict.keys():
-                new_dict['nome']=x
-                new_dict['voto'].append(y)
+        if i['nome'] not in new_dict.keys():
+            new_dict[i["nome"]]=[i["voto"]]
+        else:
+            new_dict[i["nome"]].append(i['voto'])
     return new_dict
-    
-            
-
+        
 
 
 print(aggrega_voti([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, {'nome': 'Alice', 'voto': 85}])) 
@@ -328,12 +324,119 @@ print(aggrega_voti([{'nome': 'Alice', 'voto': 90}, {'nome': 'Bob', 'voto': 75}, 
     
 
     
+"""
+Scrivi una funzione che accetti un dizionario di prodotti con i prezzi e restituisca un nuovo dizionario con solo i prodotti 
+che hanno un prezzo superiore a 20, scontati del 10%.
+For example:
+
+Test	Result
+print(filtra_e_mappa({'Penna': 15.0, 'Zaino': 50.0, 'Quaderno': 22.0}))
+{'Zaino': 45.0, 'Quaderno': 19.8}
+print(filtra_e_mappa({'Gomma': 2.0, 'Matita': 1.0})) 
+{}
+"""
 
 
+def filtra_e_mappa(prodotti: dict[str:float]) -> list[str:float]:
+    newprod={}
+    for i,j in prodotti.items():
+        if j>20:
+            newprod[i]=j-(j*10/100)
+    return newprod
+
+print(filtra_e_mappa({'Penna': 15.0, 'Zaino': 50.0, 'Quaderno': 22.0}))	
+print(filtra_e_mappa({'Tavolo': 120.0, 'Sedia': 85.0}))
+print(filtra_e_mappa({'Lampada': 35.0, 'Libro': 19.0}))
+
+    
 
 
+"""
+PARTE 1
+Scrivi una funzione chiamata create_contact() che accetta il nome e cognome, e-mail (facoltativo) e numero di telefono (facoltativo). 
+La funzione dovrebbe restituire un dizionario con i dettagli del contatto.
+ 
+PARTE 2
+Scrivi una funzione chiamata update_contact() che accetta il dizionario creato, il nome e cognome del contatto da aggiornare,
+ e il dettaglio facoltativo da aggiornare. Questa funzione dovrebbe aggiornare il dizionario del contatto.
+
+esempio:
+contact = create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787)
+print(create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787))
+print(update_contact(contact, "Mario Rossi", telefono=123456789))
+
+{'profile': 'Mario Rossi', 'email': 'mario.rossi@gmail.com', 'telefono': 788787}
+{'profile': 'Mario Rossi', 'email': 'mario.rossi@gmail.com', 'telefono': 123456789}
+
+"""
 
 
+def create_contact(name: str, email: str=None, telefono: int=None) -> dict:
+    dictionary={"name": name, "email": email, "telefono": telefono}
+    return dictionary
+
+
+def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=None) -> dict:
+    dictionary["name"]=name 
+    if email!= None:
+        dictionary["email"]= email
+    if telefono!= None:
+        dictionary["telefono"]= telefono
+    return dictionary
+        
+    
+
+
+contact = create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787)
+print(create_contact("Mario Rossi", email="mario.rossi@gmail.com", telefono=788787))
+print(update_contact(contact, "Mario Rossi", telefono=123456789))
+
+
+"""
+Scrivi una funzione che accetti tre parametri: username, password e status di attivazione dell'account (attivo/non attivo).
+L'accesso è consentito solo se il nome utente è admin", la password corrisponde a "12345" e l'account è attivo, 
+La funzione ritorna "Accesso consentito" oppure "Accesso negato".
+For example:
+print(check_access ("admin",
+"12345", True))
+print (check_access ("admin", "54321", True))
+Accesso consentito
+Accesso negato
+"""
+
+def check_access(username: str, password: int, is_active: bool) -> str:
+    if (username=="admin") and (password== 12345) and is_active:
+        return "Accesso consentito"
+    else:
+        return "Accesso negato"
+
+print(check_access ("admin", "12345", True))
+print(check_access ("admin", "54321", True))
+
+"""
+Date due stringhe s e t, restituire True se t è un anagramma di s, e False altrimenti.
+
+Un anagramma è una parola o una frase formata riorganizzando le lettere di una parola o frase diversa, in genere utilizzando 
+tutte le lettere originali esattamente una volta.
+
+For example:
+
+Test	Result
+print(anagram("anagram","nagaram"))
+True
+
+"""
+
+def anagram(s: str, t: str) -> bool:
+    s_lower=s.lower()
+    t_lower=t.lower()
+    for i in s_lower:
+        if i in t_lower and len(s)==len(t):
+            return True
+        else:
+            return False
+
+print(anagram("anagram","nagaram"))
 
 
 
