@@ -58,7 +58,7 @@ class Member:
             book.borrow()
             return self.borrowed_books
         elif book.is_borrowed== True:
-            return "Book is already"
+            return "Book is already borrowed"
     
     def return_book(self, book: Book):
         if book in self.borrowed_books and book.borrow():
@@ -96,10 +96,11 @@ class Library:
             self.members[member_id]=Member(member_id=member_id, name=name, borrowed_books=[])
     
     def borrow_book(self, member_id: str, book_id: str):
-        if book_id in self.books and member_id in self.members and self.books[book_id].is_borrowed==False:
+        if book_id in self.books and member_id in self.members.keys() and self.books[book_id].is_borrowed==False:
             self.members[member_id].borrow_book(self.books[book_id])
             return self.members[member_id].borrowed_books
-        elif 
+        elif member_id not in self.members.keys():
+            return "Member not found"
     
     def return_book(self, member_id: str, book_id: str):
         self.members[member_id].return_book(self.books[book_id])
