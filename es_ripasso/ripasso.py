@@ -439,5 +439,13 @@ def anagram(s: str, t: str) -> bool:
 print(anagram("anagram","nagaram"))
 
 
-
+def lista_a_dizionario(tuples: tuple) -> dict[str:list[int]]:
+    dict={}
+    for i in tuples:
+        if i[0] not in dict.keys():
+            dict[i[0]]=[i[1]]
+        else:
+        
+            dict[i[0]].append(i[1])
+    return dict
 
