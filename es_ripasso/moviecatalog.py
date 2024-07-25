@@ -32,7 +32,6 @@ class Movie:
             self.is_rented=True
         
     def return_movie(self):
-        #pp
         if self.is_rented:
             self.is_rented=False
         else:
